@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BitTube", "BitTube\BitTube.vcproj", "{93A504A4-871B-4757-8FE5-CBAFC7C41E8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93A504A4-871B-4757-8FE5-CBAFC7C41E8D}.Debug|Win32.ActiveCfg = Release|Win32
+		{93A504A4-871B-4757-8FE5-CBAFC7C41E8D}.Debug|Win32.Build.0 = Release|Win32
+		{93A504A4-871B-4757-8FE5-CBAFC7C41E8D}.Release|Win32.ActiveCfg = Release|Win32
+		{93A504A4-871B-4757-8FE5-CBAFC7C41E8D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

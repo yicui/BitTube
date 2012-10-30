@@ -1,0 +1,119 @@
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+CXX           = g++
+LD            = $(CXX) $(CCFLAGS) $(CPPFLAGS)
+AR            = ar
+PICFLAGS      = -fPIC
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT
+OBJEXT        = .o
+OUTPUT_OPTION = -o "$@"
+COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+LDFLAGS       = -L"."
+CCC           = $(CXX)
+MAKEFILE      = Makefile.BitTube
+DEPENDENCIES  = .depend.$(MAKEFILE)
+BTARGETDIR    = ./
+BIN           = $(BTARGETDIR)main$(EXESUFFIX)$(EXEEXT)
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+EXEEXT        = 
+LIBPREFIX     = lib
+LIBSUFFIX     = 
+GENFLAGS      = -O
+LDLIBS        = -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = Server$(OBJEXT) Peers$(OBJEXT) PeerReadyState$(OBJEXT) Trace$(OBJEXT) PeerDisconnectedState$(OBJEXT) main$(OBJEXT) Listener$(OBJEXT) Peer$(OBJEXT) bufio$(OBJEXT) Option$(OBJEXT) Tracker$(OBJEXT) Bitmap$(OBJEXT) Stat$(OBJEXT) httpencode$(OBJEXT) Content$(OBJEXT) LocalServer$(OBJEXT) PeerHandshakingState$(OBJEXT) PeerConnectingState$(OBJEXT)
+SRC           = Server.cpp Peers.cpp PeerReadyState.cpp Trace.cpp PeerDisconnectedState.cpp main.cpp Listener.cpp Peer.cpp bufio.cpp Option.cpp Tracker.cpp Bitmap.cpp Stat.cpp httpencode.cpp Content.cpp LocalServer.cpp PeerHandshakingState.cpp PeerConnectingState.cpp
+LINK.cc       = $(LD) $(LDFLAGS)
+EXPORTFLAGS   = 
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: $(BIN)
+
+$(BIN): $(OBJS)
+	@$(TESTDIRSTART) "$(BTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(BTARGETDIR)"
+	$(LINK.cc) $(OBJS) $(LDLIBS) $(OUTPUT_OPTION)
+
+generated: $(GENERATED_DIRTY)
+	@-:
+
+Server$(OBJEXT): Server.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Server.cpp
+
+Peers$(OBJEXT): Peers.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Peers.cpp
+
+PeerReadyState$(OBJEXT): PeerReadyState.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) PeerReadyState.cpp
+
+Trace$(OBJEXT): Trace.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Trace.cpp
+
+PeerDisconnectedState$(OBJEXT): PeerDisconnectedState.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) PeerDisconnectedState.cpp
+
+main$(OBJEXT): main.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) main.cpp
+
+Listener$(OBJEXT): Listener.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Listener.cpp
+
+Peer$(OBJEXT): Peer.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Peer.cpp
+
+bufio$(OBJEXT): bufio.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) bufio.cpp
+
+Option$(OBJEXT): Option.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Option.cpp
+
+Tracker$(OBJEXT): Tracker.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Tracker.cpp
+
+Bitmap$(OBJEXT): Bitmap.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Bitmap.cpp
+
+Stat$(OBJEXT): Stat.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Stat.cpp
+
+httpencode$(OBJEXT): httpencode.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) httpencode.cpp
+
+Content$(OBJEXT): Content.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Content.cpp
+
+LocalServer$(OBJEXT): LocalServer.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) LocalServer.cpp
+
+PeerHandshakingState$(OBJEXT): PeerHandshakingState.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) PeerHandshakingState.cpp
+
+PeerConnectingState$(OBJEXT): PeerConnectingState.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) PeerConnectingState.cpp
+
+clean:
+	-$(RM) $(OBJS)
+
+realclean: clean
+	-$(RM) $(BIN)
+
+#----------------------------------------------------------------------------
+#       Dependencies
+#----------------------------------------------------------------------------
+
+$(DEPENDENCIES):
+	@touch $(DEPENDENCIES)
+
+depend:
+	-$(MPC_ROOT)/depgen.pl $(CFLAGS) $(CCFLAGS) $(CPPFLAGS) -f $(DEPENDENCIES) $(SRC) 2> $(NUL)
+
+include $(DEPENDENCIES)
