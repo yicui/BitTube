@@ -34,4 +34,4 @@ in 2008 with a detailed account of this project.
 To Be Continued...
 ------------------
 Then in 2009, Adobe rolled out their RTMFP protocol which changed everything. This leads to the reincarnation of BitTube,
-which can be found [here](https://github.com/yicui/BitTube-live).
+which can be found [here](https://github.com/yicui/BitTube-on-Flash).
