@@ -1,3 +1,5 @@
+Background
+----------
 This work was created beteeen 2007 and 2008, when we were searching for a P2P solution with minimum intrusion to the 
 user experience. At the time, the mainstream P2P streaming solution were desktop rich applications such as PPStreaming,
 PPLive, etc. But users had already spending increasing amount of time on YouTube among other web portals. So we thought
@@ -5,7 +7,8 @@ there should be some light-weight approaches that deal with transportation of th
 let those websites and their Flash players worry about the rest.
 
 ![BitTube architecture](https://github.com/downloads/yicui/BitTube/architecture.jpg)
-
+Architecture
+------------
 Hence we created the architecture as above, the downloading stub sits on user's desktop machine and intercepts all
 HTTP GET requests destined to the port(s) it listens on. It then turns to the P2P world to download the requested data
 and wraps it in a HTTP response back to the requester, that's it. Also given the fact that BitTorrent was already the
@@ -28,6 +31,7 @@ We used to argue that this is the ONLY thing you have to do (in exchange for A L
 Plus, if you don't like our tracker, feel free to use anyone's or host your own. We published a 
 [paper](https://www.researchgate.net/publication/221558644_BitTube_Case_Study_of_a_Web-Based_Peer-Assisted_Video-on-Demand_System)
 in 2008 with a detailed account of this project.
-
+To Be Continued...
+------------------
 Then in 2009, Adobe rolled out their RTMFP protocol which changed everything. This leads to the reincarnation of BitTube,
 which can be found [here](https://github.com/yicui/BitTube-live).
