@@ -20,6 +20,16 @@ that this doesn't fit the video **streaming** scenario, where you must sequentia
 any downloaded piece to your player ASAP. With this regard, the sophisticated "rarest first" and "tit-for-tat" policies
 of BitTorrent have little relevance in our context, so we replaced it with our own C++ implementation.
 
+BitTube runs as a single-threaded event loop. In each cycle, it relies on the select() function (we choose non-blocking)
+to monitor all of its connections (tracker, other peers, its own listening port for requests from the browser, etc.) 
+for any connect/read/write action. Also in case you are the only peer online or other peers cannot send you data
+fast enough to sustain your streaming, you have to fall back to the HTTP server of the original content provider. It's
+rather easier to consider the HTTP server as a super peer which never goes offline. But a peer behaves a lot different
+from a server: instead of retrieving the whole chunk of video file which is slow and wasteful, we only need get 
+distinct pieces of the file from time to time. Here we achieve this by turning on the partial-get and keep-alive of the
+HTTP protocol. Looking back from now, this often reminds me of the popular Node.js+Socket.io combination in today's 
+realtime web applications.
+
 ![BitTube federation](https://github.com/downloads/yicui/BitTube/federation.jpg)
 
 In today's standard, this design is still quite intrusive, First, you need to download and install our program, which 
